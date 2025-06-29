@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 from vapi import Vapi
+import uvicorn
+
 
 load_dotenv()
 VAPI_PRIVATE_API_KEY = os.getenv('VAPI_PRIVATE_API_KEY')
@@ -56,3 +58,7 @@ def trigger_voice_agent():
         return {"status": "success", "response": response}
     except Exception as e:
         return {"status": "error", "detail": str(e)}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000)
